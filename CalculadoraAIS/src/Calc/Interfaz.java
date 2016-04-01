@@ -5,10 +5,6 @@ package Calc;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Jesús
- */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,13 +17,15 @@ public class Interfaz extends JFrame {
 	 * 
 	 */
 	private final KeyListener listener;
-    private Datos calculadora;
+    private Datos calculadora = new Datos();
+    private Datos auxCalc = new Datos();
     private final JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9, boton0;
     private final JButton botonSum, botonRes, botonMult, botonDiv, botonIgual, botonMod, botonPunto, botonInv;
     private final JButton botonRaiz, botonPi, botonDoble, botonParenI, botonParenD;
     private final JButton botonReset, botonReset1;
     private JTextField pantalla;
     private boolean existePunto;
+   
 
     Interfaz(Datos calculadoraDatos) {
 
@@ -112,8 +110,7 @@ public class Interfaz extends JFrame {
         };
 
         existePunto = false;
-        
-        calculadora = calculadoraDatos;
+        calculadora.asignar(calculadoraDatos);
 
        this.setIconImage(new ImageIcon(getClass().getResource("../51229.png")).getImage());
         this.setTitle("Calculadora");
@@ -292,7 +289,13 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                    calculadora.operacion(pantalla.getText(), "+");
+                     if (calculadora.num1.isEmpty()){
+                     calculadora.operacion(pantalla.getText(), "+");
+                     }
+                     else{
+                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "+");
+                     }
+                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -301,8 +304,14 @@ public class Interfaz extends JFrame {
         botonRes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!pantalla.getText().isEmpty()) {
-                    calculadora.operacion(pantalla.getText(), "-");
+               if (!pantalla.getText().isEmpty()) {
+                     if (calculadora.num1.isEmpty()){
+                     calculadora.operacion(pantalla.getText(), "-");
+                     }
+                     else{
+                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "-");
+                     }
+                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -312,8 +321,14 @@ public class Interfaz extends JFrame {
         botonDiv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!pantalla.getText().isEmpty()) {
-                    calculadora.operacion(pantalla.getText(), "/");                    
+              if (!pantalla.getText().isEmpty()) {
+                     if (calculadora.num1.isEmpty()){
+                     calculadora.operacion(pantalla.getText(), "/");
+                     }
+                     else{
+                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "/");
+                     }
+                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -324,7 +339,13 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                    calculadora.operacion(pantalla.getText(), "*");
+                     if (calculadora.num1.isEmpty()){
+                     calculadora.operacion(pantalla.getText(), "*");
+                     }
+                     else{
+                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "*");
+                     }
+                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -335,7 +356,13 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                    calculadora.operacion(pantalla.getText(), "%");
+                     if (calculadora.num1.isEmpty()){
+                     calculadora.operacion(pantalla.getText(), "%");
+                     }
+                     else{
+                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "%");
+                     }
+                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -346,8 +373,15 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
+                    if(calculadora.num1.isEmpty()){
                     calculadora.operacion(pantalla.getText(),"1/x");
                     pantalla.setText(calculadora.realizarOperacion(""));
+                    }
+                    else{
+                      auxCalc.operacion(pantalla.getText(),"1/x");
+                      pantalla.setText(auxCalc.realizarOperacion(""));
+                    
+                    }
                 }
                 pantalla.requestFocus();
             }
