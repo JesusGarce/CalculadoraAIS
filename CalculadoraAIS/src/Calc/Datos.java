@@ -6,7 +6,8 @@ public class Datos {
 	  String op="";
       String num1,num2;
       Double sum,multi,div,rest,result;
-	
+      Datos auxCalc;
+    
         public void asignar(Datos calculadora){
         
         op=calculadora.op;
