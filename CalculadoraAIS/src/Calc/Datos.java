@@ -7,6 +7,19 @@ public class Datos {
       String num1,num2;
       Double sum,multi,div,rest,result;
 	
+        public void asignar(Datos calculadora){
+        
+        op=calculadora.op;
+        num1=calculadora.num1;
+        num2=calculadora.num2;
+        sum=calculadora.sum;
+        rest=calculadora.rest;
+        multi=calculadora.multi;
+        div=calculadora.div;
+        result=calculadora.result;
+       
+        }
+      
 	public Datos(){
         num1="";
         op="";
@@ -56,7 +69,6 @@ public class Datos {
 	            result = 1/Double.parseDouble(num1);
 	            stringResult = Double.toString(result);
 	        } else stringResult = num2;
-	     
 	        return stringResult;
 	    }
 	}    
