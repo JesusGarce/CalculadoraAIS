@@ -18,7 +18,6 @@ public class Interfaz extends JFrame {
 	 */
 	private final KeyListener listener;
     private Datos calculadora = new Datos();
-    private Datos auxCalc = new Datos();
     private final JButton boton1, boton2, boton3, boton4, boton5, boton6, boton7, boton8, boton9, boton0;
     private final JButton botonSum, botonRes, botonMult, botonDiv, botonIgual, botonMod, botonPunto, botonInv;
     private final JButton botonRaiz, botonPi, botonDoble, botonParenI, botonParenD;
@@ -378,9 +377,9 @@ public class Interfaz extends JFrame {
                     pantalla.setText(calculadora.realizarOperacion(""));
                     }
                     else{
-                      auxCalc.operacion(pantalla.getText(),"1/x");
-                      pantalla.setText(auxCalc.realizarOperacion(""));
-                    
+                      calculadora.auxCalc = new Datos();
+                      calculadora.auxCalc.operacion(pantalla.getText(),"1/x");
+                      pantalla.setText(calculadora.auxCalc.realizarOperacion(""));
                     }
                 }
                 pantalla.requestFocus();
