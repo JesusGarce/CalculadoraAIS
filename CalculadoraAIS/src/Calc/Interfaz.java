@@ -29,7 +29,7 @@ public class Interfaz extends JFrame {
     Interfaz(Datos calculadoraDatos) {
 
         listener = new KeyListener() {
-
+        int parentesis = 0;    
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -40,7 +40,12 @@ public class Interfaz extends JFrame {
                 String let = String.valueOf(letra);
 
                 switch (let) {
-                     
+                    case "(":
+                        botonParenI.doClick();
+                        break;
+                    case ")":
+                        botonParenD.doClick();
+                        break;
                     case "+":
                         botonSum.doClick();
                         break;
@@ -110,7 +115,8 @@ public class Interfaz extends JFrame {
 
         existePunto = false;
         calculadora.asignar(calculadoraDatos);
-
+        calculadora.auxCalc = new Datos();
+        calculadora.auxCalc2 = new Datos();
        this.setIconImage(new ImageIcon(getClass().getResource("../51229.png")).getImage());
         this.setTitle("Calculadora");
 
@@ -288,11 +294,16 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                     if (calculadora.num1.isEmpty()){
+                     if (calculadora.op.isEmpty()){
                      calculadora.operacion(pantalla.getText(), "+");
                      }
                      else{
+                       if (calculadora.auxCalc.op.isEmpty()){
                      calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "+");
+                       }else{
+                      calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "+");
+                      calculadora.auxCalc.limpiar();
+                       }
                      }
                     
                 }
@@ -304,11 +315,16 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                if (!pantalla.getText().isEmpty()) {
-                     if (calculadora.num1.isEmpty()){
+                     if (calculadora.op.isEmpty()){
                      calculadora.operacion(pantalla.getText(), "-");
                      }
                      else{
+                       if (calculadora.auxCalc.op.isEmpty()){
                      calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "-");
+                       }else{
+                      calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "-");
+                      calculadora.auxCalc.limpiar();
+                       }
                      }
                     
                 }
@@ -338,13 +354,22 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                     if (calculadora.num1.isEmpty()){
+                     if (calculadora.op.isEmpty()){
                      calculadora.operacion(pantalla.getText(), "*");
                      }
                      else{
-                     calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "*");
+                         if (calculadora.auxCalc.op.isEmpty()){
+                            if(calculadora.op == "*" || calculadora.op == "/"){
+                            calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "*");
+                             }else{
+                             //calculadora.auxCalc = new Datos();
+                             calculadora.auxCalc.operacion(pantalla.getText(), "*");
+                             }
+                        }else{
+                         calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(pantalla.getText()), "*");
+                         
+                         }
                      }
-                    
                 }
                 pantalla.setText("");
                 pantalla.requestFocus();
@@ -355,7 +380,7 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                     if (calculadora.num1.isEmpty()){
+                     if (calculadora.op.isEmpty()){
                      calculadora.operacion(pantalla.getText(), "%");
                      }
                      else{
@@ -372,15 +397,15 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
-                    if(calculadora.num1.isEmpty()){
+                    if(calculadora.op.isEmpty()){
                     calculadora.operacion(pantalla.getText(),"1/x");
                     pantalla.setText(calculadora.realizarOperacion(""));
                     }
                     else{
-                      calculadora.auxCalc = new Datos();
-                      calculadora.auxCalc.operacion(pantalla.getText(),"1/x");
-                      pantalla.setText(calculadora.auxCalc.realizarOperacion(""));
-                    }
+                      calculadora.auxCalc2 = new Datos();
+                      calculadora.auxCalc2.operacion(pantalla.getText(),"1/x");
+                      pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                     }
                 }
                 pantalla.requestFocus();
             }
@@ -436,9 +461,14 @@ public class Interfaz extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!pantalla.getText().isEmpty()) {
+                    if (calculadora.auxCalc.num1.isEmpty()){
                     pantalla.setText(calculadora.realizarOperacion(pantalla.getText()));
+                }   else{
+                    pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())));
+                    }
                 }
                 pantalla.requestFocus();
+                calculadora.limpiar();
             }
         });
 

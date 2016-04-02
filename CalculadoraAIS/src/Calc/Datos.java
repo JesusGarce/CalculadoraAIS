@@ -4,10 +4,10 @@ import javax.swing.*;
 public class Datos {
 
 	  String op="";
-      String num1,num2;
-      Double sum,multi,div,rest,result;
-      Datos auxCalc;
-    
+          String num1,num2;
+        Double sum,multi,div,rest,result;
+	Datos auxCalc;
+        Datos auxCalc2;
         public void asignar(Datos calculadora){
         
         op=calculadora.op;
@@ -36,6 +36,8 @@ public class Datos {
 	        num1="";
 	        op="";
 	        num2="";
+                auxCalc= new Datos();
+                auxCalc2= new Datos();
 	    }
 
 	 String realizarOperacion(String cadena) {
