@@ -90,18 +90,23 @@ public class Interfaz extends javax.swing.JFrame {
         boton1 = new javax.swing.JButton();
         boton2 = new javax.swing.JButton();
         boton3 = new javax.swing.JButton();
-        botonReset = new javax.swing.JButton();
-        botonReset1 = new javax.swing.JButton();
-        botonParenI = new javax.swing.JButton();
-        botonParenD = new javax.swing.JButton();
-        botonMult = new javax.swing.JButton();
-        botonDiv = new javax.swing.JButton();
-        boton0 = new javax.swing.JButton();
-        botonPunto = new javax.swing.JButton();
-        botonIgual = new javax.swing.JButton();
-        botonSum = new javax.swing.JButton();
-        botonRes = new javax.swing.JButton();
+        botonReset = 
+        
+        gsdfdddddddddddddddddddddddddddd
+        saaaa
 
+gsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaagsdfdddddddddddddddddddddddddddd
+        saaaa
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pantalla.addActionListener(new java.awt.event.ActionListener() {
