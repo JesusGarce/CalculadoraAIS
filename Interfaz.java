@@ -1,13 +1,8 @@
 package clases;
 
-import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 
-/**
- *
- * @author Sergio
- */
+
 public class Interfaz extends javax.swing.JFrame {
     private Datos calculadora = new Datos();
     
