@@ -1,8 +1,13 @@
 package clases;
 
+import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 
-
+/**
+ *
+ * @author Sergio
+ */
 public class Interfaz extends javax.swing.JFrame {
     private Datos calculadora = new Datos();
     
@@ -47,7 +52,7 @@ public class Interfaz extends javax.swing.JFrame {
         botonRes.setVisible(false);
         botonAyuda.setVisible(false);
         
-      
+        //calculadora.asignar(calculadoraDatos);
  
     }
     
@@ -90,23 +95,18 @@ public class Interfaz extends javax.swing.JFrame {
         boton1 = new javax.swing.JButton();
         boton2 = new javax.swing.JButton();
         boton3 = new javax.swing.JButton();
-        botonReset = 
-        
-        gsdfdddddddddddddddddddddddddddd
-        saaaa
+        botonReset = new javax.swing.JButton();
+        botonReset1 = new javax.swing.JButton();
+        botonParenI = new javax.swing.JButton();
+        botonParenD = new javax.swing.JButton();
+        botonMult = new javax.swing.JButton();
+        botonDiv = new javax.swing.JButton();
+        boton0 = new javax.swing.JButton();
+        botonPunto = new javax.swing.JButton();
+        botonIgual = new javax.swing.JButton();
+        botonSum = new javax.swing.JButton();
+        botonRes = new javax.swing.JButton();
 
-gsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaagsdfdddddddddddddddddddddddddddd
-        saaaa
-        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pantalla.addActionListener(new java.awt.event.ActionListener() {
