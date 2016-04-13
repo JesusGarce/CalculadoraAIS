@@ -47,7 +47,7 @@ public class Interfaz extends javax.swing.JFrame {
         botonRes.setVisible(false);
         botonAyuda.setVisible(false);
         
-        //calculadora.asignar(calculadoraDatos);
+      
  
     }
     
