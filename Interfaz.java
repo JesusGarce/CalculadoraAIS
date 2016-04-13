@@ -66,46 +66,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        pantalla = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jbOn = new javax.swing.JButton();
-        botonAyuda = new javax.swing.JButton();
-        jbOff = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jbSen = new javax.swing.JButton();
-        jbCos = new javax.swing.JButton();
-        jbTan = new javax.swing.JButton();
-        jbLn = new javax.swing.JButton();
-        jbCuadrado = new javax.swing.JButton();
-        jbCubo = new javax.swing.JButton();
-        jbFactorial = new javax.swing.JButton();
-        jbLog = new javax.swing.JButton();
-        jbi = new javax.swing.JButton();
-        jbRaiz = new javax.swing.JButton();
-        jbElevado = new javax.swing.JButton();
-        jbFraccion = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        boton7 = new javax.swing.JButton();
-        boton8 = new javax.swing.JButton();
-        boton9 = new javax.swing.JButton();
-        boton4 = new javax.swing.JButton();
-        boton5 = new javax.swing.JButton();
-        boton6 = new javax.swing.JButton();
-        boton1 = new javax.swing.JButton();
-        boton2 = new javax.swing.JButton();
-        boton3 = new javax.swing.JButton();
-        botonReset = new javax.swing.JButton();
-        botonReset1 = new javax.swing.JButton();
-        botonParenI = new javax.swing.JButton();
-        botonParenD = new javax.swing.JButton();
-        botonMult = new javax.swing.JButton();
-        botonDiv = new javax.swing.JButton();
-        boton0 = new javax.swing.JButton();
-        botonPunto = new javax.swing.JButton();
-        botonIgual = new javax.swing.JButton();
-        botonSum = new javax.swing.JButton();
-        botonRes = new javax.swing.JButton();
+       
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
