@@ -16,6 +16,7 @@ private String texto;
      */
     public operacionActual(String text) {
         texto =text;
+        setTitle("Operación actual");
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
