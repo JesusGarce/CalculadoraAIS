@@ -11,13 +11,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     private Datos calculadora = new Datos();
     private Boolean existePunto = false;
-    private Integer parentesis = 0;
-    private Character lastSymbol = null;
+    private Integer parentesis = 0; //abre parentesis +1 cierra parent -1 si < 0, mal
+    private String lastSymbol = ""; //guarda el ultimo tipo de simbolo para detectar operaciones incoherentes
 
     public Interfaz() {
         initComponents();
-        calculadora.auxCalc = new Datos();
-        calculadora.auxCalc2 = new Datos();
+        calculadora.limpiar();
+        calculadora.auxCalc3.limpiar();
         this.setVisible(true);
         jbOn.setVisible(true);
         pantalla.setVisible(false);
@@ -207,6 +207,11 @@ public class Interfaz extends javax.swing.JFrame {
         jbLog.setBackground(new java.awt.Color(0, 0, 0));
         jbLog.setForeground(new java.awt.Color(255, 255, 255));
         jbLog.setText("log");
+        jbLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogActionPerformed(evt);
+            }
+        });
 
         jbi.setBackground(new java.awt.Color(0, 0, 0));
         jbi.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,6 +225,11 @@ public class Interfaz extends javax.swing.JFrame {
         jbRaiz.setBackground(new java.awt.Color(0, 0, 0));
         jbRaiz.setForeground(new java.awt.Color(255, 255, 255));
         jbRaiz.setText("RAÍZ");
+        jbRaiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRaizActionPerformed(evt);
+            }
+        });
 
         jbElevado.setBackground(new java.awt.Color(0, 0, 0));
         jbElevado.setForeground(new java.awt.Color(255, 255, 255));
@@ -603,129 +613,409 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jbOffActionPerformed
 
     private void jbTanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "tan");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "tan");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                    existePunto = false;
+                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "tan");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "tan");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "tan");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "tan");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
 
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbLnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "ln");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "ln");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                    existePunto = false;
+                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "ln");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "ln");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "ln");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "ln");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
+    }//GEN-LAST:event_jbTanActionPerformed
+
+    private void jbRaizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "raiz");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "raiz");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "raiz");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "raiz");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
+            }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
+        }
+        pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbSenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "sin");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "sin");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "sin");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "sin");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "sin");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "sin");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbCosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "cos");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "cos");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "cos");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "cos");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "cos");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "cos");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "1/x");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "1/x");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "1/x");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "1/x");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "1/x");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "1/x");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "x^2");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "x^2");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "x^2");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "x^2");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "x^2");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "x^2");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
-    
     private void jbCuboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "x^3");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "x^3");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "x^3");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "x^3");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "x^3");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "x^3");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
+    }//GEN-LAST:event_jbTanActionPerformed
+
+    private void jbLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "log");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "log");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "log");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "log");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
+            }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
+        }
+        pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbFactorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "!");
-                pantalla.setText(calculadora.realizarOperacion(""));
-                calculadora.limpiar();
-            } else {
-                calculadora.auxCalc2.operacion(pantalla.getText(), "!");
-                pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
-                calculadora.auxCalc2.limpiar();
+        if (lastSymbol.equals("num")) {
+            if (!pantalla.getText().isEmpty()) {
+                if (!lastSymbol.equals("num")) {
+                    FormulaIncoherente hola = new FormulaIncoherente();
+                    hola.setVisible(true);
+
+                } else {
+                   existePunto = false;
+                   lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
+                    if (parentesis == 0) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "!");
+                            pantalla.setText(calculadora.realizarOperacion(""));
+                            calculadora.limpiar();
+                        } else {
+                            calculadora.auxCalc2.operacion(pantalla.getText(), "!");
+                            pantalla.setText(calculadora.auxCalc2.realizarOperacion(""));
+                            calculadora.auxCalc2.limpiar();
+                        }
+                    } else if (parentesis == 1) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "!");
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(""));
+                        calculadora.auxCalc3.limpiar();
+                    } else {
+                        calculadora.auxCalc3.auxCalc2.operacion(pantalla.getText(), "!");
+                        pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
+                        calculadora.auxCalc3.auxCalc2.limpiar();
+
+                    }
+                }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.requestFocus();
+
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void jbElevadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (!pantalla.getText().isEmpty()) {
+            lastSymbol = "^";
+            existePunto = false;
             if (calculadora.op.isEmpty()) {
                 calculadora.operacion(pantalla.getText(), "^");
             } else {
@@ -737,43 +1027,84 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jbTanActionPerformed
 
     private void boton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton9ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "9");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton9ActionPerformed
 
     private void botonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResetActionPerformed
         pantalla.setText("");
+        lastSymbol = "";
+        parentesis = 0;
         calculadora.limpiar();
+        calculadora.auxCalc3.limpiar();
         existePunto = false;
         pantalla.requestFocus();
     }//GEN-LAST:event_botonResetActionPerformed
 
     private void botonResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "-");
-            } else {
-                if (calculadora.auxCalc.op.isEmpty()) {
-
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "-");
+        if (!pantalla.getText().isEmpty() || lastSymbol.equals("(")) {
+            if (lastSymbol.equals("num") || lastSymbol.equals("(")) {
+                existePunto = false;
+                lastSymbol = "-";
+                if (parentesis == 0) {
+                    if (calculadora.op.isEmpty()) {
+                        calculadora.operacion(pantalla.getText(), "-");
                     } else {
-                        calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "-");
-                    }
-                } else {
+                        if (calculadora.auxCalc.op.isEmpty()) {
 
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))), "-");
-                        calculadora.auxCalc.limpiar();
-                    } else {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "-");
-                        calculadora.auxCalc.limpiar();
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "-");
+                            } else {
+                                calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "-");
+                            }
+                        } else {
+
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))), "-");
+                                calculadora.auxCalc.limpiar();
+                            } else {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "-");
+                                calculadora.auxCalc.limpiar();
+                            }
+                        }
                     }
+                } else if (parentesis == 1) {
+                    System.out.println("entra");
+                    if (calculadora.auxCalc3.op.isEmpty()) {
+                        if (pantalla.getText().isEmpty()) { //parentesis inicial
+                            calculadora.auxCalc3.operacion("0", "-");
+                        } else {
+                            calculadora.auxCalc3.operacion(pantalla.getText(), "-");
+                        }
+                    } else {
+                        if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
+
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "-");
+                            } else {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(pantalla.getText()), "-");
+                            }
+                        } else {
+
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText()))), "-");
+                                calculadora.auxCalc3.auxCalc.limpiar();
+                            } else {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(pantalla.getText())), "-");
+                                calculadora.auxCalc3.auxCalc.limpiar();
+                            }
+                        }
+                    }
+
                 }
+            } else {
+                FormulaIncoherente hola = new FormulaIncoherente();
+                hola.setVisible(true);
             }
-
         } else {
             calculadora.operacion("0", "-");
+            lastSymbol = "-";
         }
         pantalla.setText("");
         pantalla.requestFocus();
@@ -784,11 +1115,13 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jbFraccionActionPerformed
 
     private void boton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton7ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "7");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton7ActionPerformed
 
     private void boton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton8ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "8");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton8ActionPerformed
@@ -808,73 +1141,154 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_botonReset1ActionPerformed
 
     private void boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton4ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "4");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton4ActionPerformed
 
     private void boton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton5ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "5");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton5ActionPerformed
 
     private void boton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton6ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "6");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton6ActionPerformed
 
     private void botonParenIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParenIActionPerformed
-        // TODO add your handling code here:
+        lastSymbol = "(";
+        parentesis += 1;
+        pantalla.setText("");
+        pantalla.requestFocus();
     }//GEN-LAST:event_botonParenIActionPerformed
 
     private void botonParenDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParenDActionPerformed
-        // TODO add your handling code here:
+        lastSymbol = "num"; // al cerrar el parentesis calcularemos su contenido, un numero
+        if (parentesis < 1) {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
+        } else {
+            parentesis -= 1;
+            if (parentesis == 0) {
+                if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
+                    if (calculadora.auxCalc3.auxCalc2.op.isEmpty()) {
+
+                        if (calculadora.auxCalc3.op.isEmpty()) {
+                            calculadora.auxCalc3.operacion(pantalla.getText(), "+");
+                            pantalla.setText(calculadora.auxCalc3.realizarOperacion("0"));
+                        } else {
+                            pantalla.setText(calculadora.auxCalc3.realizarOperacion(pantalla.getText()));
+                        }
+                    } else {
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())));
+
+                    }
+                } else {
+                    if (calculadora.auxCalc3.auxCalc2.op.isEmpty()) {
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(pantalla.getText())));
+                    } else {
+                        pantalla.setText(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText()))));
+                    }
+                }
+                pantalla.requestFocus();
+                calculadora.auxCalc3.limpiar();
+            }
+        }
     }//GEN-LAST:event_botonParenDActionPerformed
 
     private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "1");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton1ActionPerformed
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "2");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton3ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "3");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton3ActionPerformed
 
     private void botonMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMultActionPerformed
         if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "*");
+            if (!lastSymbol.equals("num")) {
+                FormulaIncoherente hola = new FormulaIncoherente();
+                hola.setVisible(true);
             } else {
-                if (calculadora.auxCalc.op.isEmpty()) {
-                    if (calculadora.op == "*" || calculadora.op == "/") {
-                        if (calculadora.auxCalc2.op == "^") {
-                            calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "*");
-                        } else {
-                            calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "*");
-                        }
+              existePunto = false;
+              lastSymbol = "*";
+                if (parentesis == 1) {
+
+                    if (calculadora.auxCalc3.op.isEmpty()) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "*");
                     } else {
-                        if (calculadora.auxCalc2.op == "^") {
-                        } else {
-                            if (calculadora.auxCalc2.op == "^") {
-                                calculadora.auxCalc.operacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()), "*");
+                        if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
+                            if (calculadora.auxCalc3.op == "*" || calculadora.auxCalc3.op == "/") {
+                                if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                    calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "*");
+                                } else {
+                                    calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(pantalla.getText()), "*");
+                                }
                             } else {
-                                calculadora.auxCalc.operacion(pantalla.getText(), "*");
+                                if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                } else {
+                                    if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                        calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText()), "*");
+                                    } else {
+                                        calculadora.auxCalc3.auxCalc.operacion(pantalla.getText(), "*");
+                                    }
+                                }
+                            }
+                        } else {
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "*");
+                            } else {
+                                calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc.realizarOperacion(pantalla.getText()), "*");
                             }
                         }
                     }
                 } else {
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "*");
+                    if (calculadora.op.isEmpty()) {
+                        calculadora.operacion(pantalla.getText(), "*");
                     } else {
-                        calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(pantalla.getText()), "*");
+                        if (calculadora.auxCalc.op.isEmpty()) {
+                            if (calculadora.op == "*" || calculadora.op == "/") {
+                                if (calculadora.auxCalc2.op == "^") {
+                                    calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "*");
+                                } else {
+                                    calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "*");
+                                }
+                            } else {
+                                if (calculadora.auxCalc2.op == "^") {
+                                } else {
+                                    if (calculadora.auxCalc2.op == "^") {
+                                        calculadora.auxCalc.operacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()), "*");
+                                    } else {
+                                        calculadora.auxCalc.operacion(pantalla.getText(), "*");
+                                    }
+                                }
+                            }
+                        } else {
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "*");
+                            } else {
+                                calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(pantalla.getText()), "*");
+                            }
+                        }
                     }
                 }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.setText("");
         pantalla.requestFocus();
@@ -882,47 +1296,90 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDivActionPerformed
         if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "/");
+            if (!lastSymbol.equals("num")) {
+                FormulaIncoherente hola = new FormulaIncoherente();
+                hola.setVisible(true);
             } else {
-                if (calculadora.auxCalc.op.isEmpty()) {
-                    if (calculadora.op == "*" || calculadora.op == "/") {
-                        if (calculadora.auxCalc2.op == "^") {
-                            calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "/");
-                        } else {
-                            calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "/");
-                        }
+              existePunto = false;
+              lastSymbol = "/";
+                if (parentesis == 1) {
+
+                    if (calculadora.auxCalc3.op.isEmpty()) {
+                        calculadora.auxCalc3.operacion(pantalla.getText(), "/");
                     } else {
-                        if (calculadora.auxCalc2.op == "^") {
-                        } else {
-                            if (calculadora.auxCalc2.op == "^") {
-                                calculadora.auxCalc.operacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()), "/");
+                        if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
+                            if (calculadora.auxCalc3.op == "*" || calculadora.auxCalc3.op == "/") {
+                                if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                    calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "/");
+                                } else {
+                                    calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(pantalla.getText()), "/");
+                                }
                             } else {
-                                calculadora.auxCalc.operacion(pantalla.getText(), "/");
+                                if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                } else {
+                                    if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                        calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText()), "/");
+                                    } else {
+                                        calculadora.auxCalc3.auxCalc.operacion(pantalla.getText(), "/");
+                                    }
+                                }
+                            }
+                        } else {
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "/");
+                            } else {
+                                calculadora.auxCalc3.auxCalc.operacion(calculadora.auxCalc3.auxCalc.realizarOperacion(pantalla.getText()), "/");
                             }
                         }
                     }
                 } else {
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "/");
+                    if (calculadora.op.isEmpty()) {
+                        calculadora.operacion(pantalla.getText(), "/");
                     } else {
-                        calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(pantalla.getText()), "/");
+                        if (calculadora.auxCalc.op.isEmpty()) {
+                            if (calculadora.op == "*" || calculadora.op == "/") {
+                                if (calculadora.auxCalc2.op == "^") {
+                                    calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "/");
+                                } else {
+                                    calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "/");
+                                }
+                            } else {
+                                if (calculadora.auxCalc2.op == "^") {
+                                } else {
+                                    if (calculadora.auxCalc2.op == "^") {
+                                        calculadora.auxCalc.operacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()), "/");
+                                    } else {
+                                        calculadora.auxCalc.operacion(pantalla.getText(), "/");
+                                    }
+                                }
+                            }
+                        } else {
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "/");
+                            } else {
+                                calculadora.auxCalc.operacion(calculadora.auxCalc.realizarOperacion(pantalla.getText()), "/");
+                            }
+                        }
                     }
                 }
             }
+        } else {
+            FormulaIncoherente hola = new FormulaIncoherente();
+            hola.setVisible(true);
         }
         pantalla.setText("");
         pantalla.requestFocus();
     }//GEN-LAST:event_botonDivActionPerformed
 
     private void boton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton0ActionPerformed
+        lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "0");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton0ActionPerformed
 
     private void botonPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPuntoActionPerformed
         String aux = pantalla.getText();
-
+        lastSymbol = "num";
         if (aux.isEmpty()) {
             pantalla.setText("0.");
             existePunto = true;
@@ -937,51 +1394,103 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void botonIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIgualActionPerformed
         if (!pantalla.getText().isEmpty()) {
-            if (calculadora.auxCalc.op.isEmpty()) {
-                if (calculadora.auxCalc2.op.isEmpty()) {
-                    pantalla.setText(calculadora.realizarOperacion(pantalla.getText()));
-                } else {
-                    pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())));
-
-                }
+            if (parentesis != 0) {
+                FormulaIncoherente hola = new FormulaIncoherente();
+                hola.setVisible(true);
             } else {
-                if (calculadora.auxCalc2.op.isEmpty()) {
-                    pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())));
+              existePunto = false;
+              if (calculadora.auxCalc.op.isEmpty()) {
+                    if (calculadora.auxCalc2.op.isEmpty()) {
+                        if (calculadora.op.isEmpty()) {
+                            calculadora.operacion(pantalla.getText(), "+");
+                            pantalla.setText(calculadora.realizarOperacion("0"));
+                        } else {
+                            pantalla.setText(calculadora.realizarOperacion(pantalla.getText()));
+                        }
+                    } else {
+                        pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())));
+
+                    }
                 } else {
-                    pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))));
+                    if (calculadora.auxCalc2.op.isEmpty()) {
+                        pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())));
+                    } else {
+                        pantalla.setText(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))));
+                    }
                 }
             }
         }
         pantalla.requestFocus();
+        lastSymbol = "num";
+        parentesis = 0;
         calculadora.limpiar();
+        calculadora.auxCalc3.limpiar();
+
     }//GEN-LAST:event_botonIgualActionPerformed
 
     private void botonSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSumActionPerformed
-        if (!pantalla.getText().isEmpty()) {
-            if (calculadora.op.isEmpty()) {
-                calculadora.operacion(pantalla.getText(), "+");
-            } else {
-                if (calculadora.auxCalc.op.isEmpty()) {
-
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "+");
+        if (!pantalla.getText().isEmpty() || lastSymbol.equals("(")) {
+            if (lastSymbol.equals("num") || lastSymbol.equals("(")) {
+                existePunto = false;
+                lastSymbol = "+";
+                if (parentesis == 0) {
+                    if (calculadora.op.isEmpty()) {
+                        calculadora.operacion(pantalla.getText(), "+");
                     } else {
-                        calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "+");
-                    }
-                } else {
+                        if (calculadora.auxCalc.op.isEmpty()) {
 
-                    if (calculadora.auxCalc2.op == "^") {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))), "+");
-                        calculadora.auxCalc.limpiar();
-                    } else {
-                        calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "+");
-                        calculadora.auxCalc.limpiar();
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText())), "+");
+                            } else {
+                                calculadora.operacion(calculadora.realizarOperacion(pantalla.getText()), "+");
+                            }
+                        } else {
+
+                            if (calculadora.auxCalc2.op == "^") {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(calculadora.auxCalc2.realizarOperacion(pantalla.getText()))), "+");
+                                calculadora.auxCalc.limpiar();
+                            } else {
+                                calculadora.operacion(calculadora.realizarOperacion(calculadora.auxCalc.realizarOperacion(pantalla.getText())), "+");
+                                calculadora.auxCalc.limpiar();
+                            }
+                        }
                     }
+                } else if (parentesis == 1) {
+                    System.out.println("entra");
+                    if (calculadora.auxCalc3.op.isEmpty()) {
+                        if (pantalla.getText().isEmpty()) { //parentesis inicial
+                            calculadora.auxCalc3.operacion("0", "+");
+                        } else {
+                            calculadora.auxCalc3.operacion(pantalla.getText(), "+");
+                        }
+                    } else {
+                        if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
+
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText())), "+");
+                            } else {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(pantalla.getText()), "+");
+                            }
+                        } else {
+
+                            if (calculadora.auxCalc3.auxCalc2.op == "^") {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(calculadora.auxCalc3.auxCalc2.realizarOperacion(pantalla.getText()))), "+");
+                                calculadora.auxCalc3.auxCalc.limpiar();
+                            } else {
+                                calculadora.auxCalc3.operacion(calculadora.auxCalc3.realizarOperacion(calculadora.auxCalc3.auxCalc.realizarOperacion(pantalla.getText())), "+");
+                                calculadora.auxCalc3.auxCalc.limpiar();
+                            }
+                        }
+                    }
+
                 }
+            } else {
+                FormulaIncoherente hola = new FormulaIncoherente();
+                hola.setVisible(true);
             }
-
-        }else {
+        } else {
             calculadora.operacion("0", "+");
+            lastSymbol = "+";
         }
         pantalla.setText("");
         pantalla.requestFocus();
@@ -1050,6 +1559,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonFormula;
     private javax.swing.JButton boton0;
     private javax.swing.JButton boton1;
     private javax.swing.JButton boton2;
