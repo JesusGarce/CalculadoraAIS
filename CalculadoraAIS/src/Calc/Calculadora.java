@@ -2,7 +2,7 @@ package Calc;
 
 public class Calculadora {
     public Calculadora() {
-        new Interfaz(new Datos());
+        new Interfaz();
     }
     /**
      * @param args the command line arguments

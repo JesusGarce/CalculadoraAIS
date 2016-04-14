@@ -13,7 +13,7 @@ public class Interfaz extends javax.swing.JFrame {
     private Boolean existePunto = false;
     private Integer parentesis = 0; //abre parentesis +1 cierra parent -1 si < 0, mal
     private String lastSymbol = ""; //guarda el ultimo tipo de simbolo para detectar operaciones incoherentes
-
+    private String stringFormula = "";
     public Interfaz() {
         initComponents();
         calculadora.limpiar();
@@ -56,6 +56,7 @@ public class Interfaz extends javax.swing.JFrame {
         botonSum.setVisible(false);
         botonRes.setVisible(false);
         botonAyuda.setVisible(false);
+        botonOperacion.setVisible(false);
 
     }
 
@@ -67,7 +68,8 @@ public class Interfaz extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+        
+        botonOperacion = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pantalla = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -213,6 +215,12 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        botonOperacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOperacionActionPerformed(evt);
+            }
+        });
+        
         jbi.setBackground(new java.awt.Color(0, 0, 0));
         jbi.setForeground(new java.awt.Color(255, 255, 255));
         jbi.setText("i");
@@ -309,30 +317,34 @@ public class Interfaz extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jbOff)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbOn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(botonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jbOff)
+                .addGap(75, 75, 75)
+                .addComponent(botonOperacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbOn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(botonAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jbOn)
-                                .addComponent(jbOff))
-                        .addGap(18, 18, 18)
-                        .addComponent(botonAyuda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbOn)
+                    .addComponent(jbOff)
+                    .addComponent(botonOperacion))
+                .addGap(18, 18, 18)
+                .addComponent(botonAyuda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
 
         boton7.setBackground(new java.awt.Color(255, 255, 255));
         boton7.setText("7");
@@ -342,6 +354,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        
+        botonOperacion.setText("VER OPERACIÓN");
+        botonOperacion.setBackground(new java.awt.Color(255, 0, 0));
+        
         boton8.setBackground(new java.awt.Color(255, 255, 255));
         boton8.setText("8");
         boton8.addActionListener(new java.awt.event.ActionListener() {
@@ -611,15 +627,16 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOffActionPerformed
         dispose();
     }//GEN-LAST:event_jbOffActionPerformed
+  private void botonOperacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOffActionPerformed
+        operacionActual Hola = new operacionActual(stringFormula);
+        Hola.setVisible(true);
+    }//GEN-LAST:event_jbOffActionPerformedbotonOperacionActionPerformed
 
+    
     private void jbTanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                    stringFormula=stringFormula + "tan";
                     existePunto = false;
                     lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -642,10 +659,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("tan no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -655,11 +672,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbLnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                
+                                        stringFormula=stringFormula + "ln";
                     existePunto = false;
                     lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -682,10 +696,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("ln no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -695,11 +709,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbRaizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                 
+                                        stringFormula=stringFormula + "sqrt";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -721,11 +732,11 @@ public class Interfaz extends javax.swing.JFrame {
                         pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
-                    }
+                    
                 }
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("raiz no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -735,11 +746,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbSenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                                                       stringFormula=stringFormula + "sin";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -761,11 +768,11 @@ public class Interfaz extends javax.swing.JFrame {
                         pantalla.setText(calculadora.auxCalc3.auxCalc2.realizarOperacion(""));
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
-                    }
+                    
                 }
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("sin no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -775,11 +782,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbCosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                                        stringFormula=stringFormula + "cos";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -802,10 +805,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("cos no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -815,11 +818,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+             
+                                        stringFormula=stringFormula + "inv";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -842,10 +842,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("invertir no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -855,11 +855,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+               
+                                        stringFormula=stringFormula + "^2";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -882,10 +879,9 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
-            }
+                            }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("^2 no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -895,11 +891,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbCuboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+                                                     stringFormula=stringFormula + "^3";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -922,10 +914,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("^3 no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -935,11 +927,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+               
+                                        stringFormula=stringFormula + "log";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -962,10 +951,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("log no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -975,11 +964,8 @@ public class Interfaz extends javax.swing.JFrame {
     private void jbFactorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbTanActionPerformed
         if (lastSymbol.equals("num")) {
             if (!pantalla.getText().isEmpty()) {
-                if (!lastSymbol.equals("num")) {
-                    FormulaIncoherente hola = new FormulaIncoherente();
-                    hola.setVisible(true);
-
-                } else {
+               
+                                        stringFormula=stringFormula + "!";
                    existePunto = false;
                    lastSymbol = "num"; //es inmediato, con lo que es como si hubiese un num
                     if (parentesis == 0) {
@@ -1002,10 +988,10 @@ public class Interfaz extends javax.swing.JFrame {
                         calculadora.auxCalc3.auxCalc2.limpiar();
 
                     }
-                }
+                
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("factorial no puede operar sobre esta fórmula");
             hola.setVisible(true);
         }
         pantalla.requestFocus();
@@ -1016,6 +1002,7 @@ public class Interfaz extends javax.swing.JFrame {
         if (!pantalla.getText().isEmpty()) {
             lastSymbol = "^";
             existePunto = false;
+                                stringFormula=stringFormula + "^";
             if (calculadora.op.isEmpty()) {
                 calculadora.operacion(pantalla.getText(), "^");
             } else {
@@ -1028,6 +1015,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void boton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton9ActionPerformed
         lastSymbol = "num";
+                            stringFormula=stringFormula + "9";
         pantalla.setText(pantalla.getText() + "9");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton9ActionPerformed
@@ -1047,6 +1035,7 @@ public class Interfaz extends javax.swing.JFrame {
             if (lastSymbol.equals("num") || lastSymbol.equals("(")) {
                 existePunto = false;
                 lastSymbol = "-";
+                                    stringFormula=stringFormula + "-";
                 if (parentesis == 0) {
                     if (calculadora.op.isEmpty()) {
                         calculadora.operacion(pantalla.getText(), "-");
@@ -1099,7 +1088,7 @@ public class Interfaz extends javax.swing.JFrame {
 
                 }
             } else {
-                FormulaIncoherente hola = new FormulaIncoherente();
+                FormulaIncoherente hola = new FormulaIncoherente("- no puede operar sobre esta fórmula");
                 hola.setVisible(true);
             }
         } else {
@@ -1117,6 +1106,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void boton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton7ActionPerformed
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "7");
+                            stringFormula=stringFormula + "7";
         pantalla.requestFocus();
     }//GEN-LAST:event_boton7ActionPerformed
 
@@ -1124,6 +1114,7 @@ public class Interfaz extends javax.swing.JFrame {
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "8");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "8";
     }//GEN-LAST:event_boton8ActionPerformed
 
     private void botonReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReset1ActionPerformed
@@ -1132,7 +1123,7 @@ public class Interfaz extends javax.swing.JFrame {
             String borrado = cadena.substring(cadena.length() - 1, cadena.length());
             cadena = cadena.substring(0, cadena.length() - 1);
             pantalla.setText(cadena);
-
+                    stringFormula = stringFormula.substring(0, stringFormula.length()-1);
             if (".".equals(borrado)) {
                 existePunto = false;
             }
@@ -1142,6 +1133,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void boton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton4ActionPerformed
         lastSymbol = "num";
+                            stringFormula=stringFormula + "4";
         pantalla.setText(pantalla.getText() + "4");
         pantalla.requestFocus();
     }//GEN-LAST:event_boton4ActionPerformed
@@ -1150,12 +1142,14 @@ public class Interfaz extends javax.swing.JFrame {
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "5");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "5";
     }//GEN-LAST:event_boton5ActionPerformed
 
     private void boton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton6ActionPerformed
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "6");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "6";
     }//GEN-LAST:event_boton6ActionPerformed
 
     private void botonParenIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParenIActionPerformed
@@ -1163,14 +1157,16 @@ public class Interfaz extends javax.swing.JFrame {
         parentesis += 1;
         pantalla.setText("");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "(";
     }//GEN-LAST:event_botonParenIActionPerformed
 
     private void botonParenDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonParenDActionPerformed
         lastSymbol = "num"; // al cerrar el parentesis calcularemos su contenido, un numero
         if (parentesis < 1) {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("')' inválido, no hay suficientes '('");
             hola.setVisible(true);
         } else {
+                                stringFormula=stringFormula + ")";
             parentesis -= 1;
             if (parentesis == 0) {
                 if (calculadora.auxCalc3.auxCalc.op.isEmpty()) {
@@ -1203,26 +1199,30 @@ public class Interfaz extends javax.swing.JFrame {
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "1");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "1";
     }//GEN-LAST:event_boton1ActionPerformed
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "2");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "2";
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton3ActionPerformed
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "3");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "3";
     }//GEN-LAST:event_boton3ActionPerformed
 
     private void botonMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMultActionPerformed
         if (!pantalla.getText().isEmpty()) {
             if (!lastSymbol.equals("num")) {
-                FormulaIncoherente hola = new FormulaIncoherente();
+                FormulaIncoherente hola = new FormulaIncoherente("* no puede operar sobre esta fórmula");
                 hola.setVisible(true);
             } else {
+                                    stringFormula=stringFormula + "*";
               existePunto = false;
               lastSymbol = "*";
                 if (parentesis == 1) {
@@ -1287,7 +1287,7 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("* no puede operar, ya que no hay nada sobre lo que operar");
             hola.setVisible(true);
         }
         pantalla.setText("");
@@ -1297,11 +1297,12 @@ public class Interfaz extends javax.swing.JFrame {
     private void botonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonDivActionPerformed
         if (!pantalla.getText().isEmpty()) {
             if (!lastSymbol.equals("num")) {
-                FormulaIncoherente hola = new FormulaIncoherente();
+                FormulaIncoherente hola = new FormulaIncoherente("/ no puede operar sobre esta fórmula");
                 hola.setVisible(true);
             } else {
               existePunto = false;
               lastSymbol = "/";
+                                  stringFormula=stringFormula + "/";
                 if (parentesis == 1) {
 
                     if (calculadora.auxCalc3.op.isEmpty()) {
@@ -1364,7 +1365,7 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         } else {
-            FormulaIncoherente hola = new FormulaIncoherente();
+            FormulaIncoherente hola = new FormulaIncoherente("/ no puede operar, ya que no hay nada sobre lo que operar");
             hola.setVisible(true);
         }
         pantalla.setText("");
@@ -1375,11 +1376,13 @@ public class Interfaz extends javax.swing.JFrame {
         lastSymbol = "num";
         pantalla.setText(pantalla.getText() + "0");
         pantalla.requestFocus();
+                            stringFormula=stringFormula + "0";
     }//GEN-LAST:event_boton0ActionPerformed
 
     private void botonPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPuntoActionPerformed
         String aux = pantalla.getText();
         lastSymbol = "num";
+                            stringFormula=stringFormula + ".";
         if (aux.isEmpty()) {
             pantalla.setText("0.");
             existePunto = true;
@@ -1395,7 +1398,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void botonIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIgualActionPerformed
         if (!pantalla.getText().isEmpty()) {
             if (parentesis != 0) {
-                FormulaIncoherente hola = new FormulaIncoherente();
+                FormulaIncoherente hola = new FormulaIncoherente("parentesis no cerrados");
                 hola.setVisible(true);
             } else {
               existePunto = false;
@@ -1425,7 +1428,9 @@ public class Interfaz extends javax.swing.JFrame {
         parentesis = 0;
         calculadora.limpiar();
         calculadora.auxCalc3.limpiar();
-
+        operacionActual hola = new operacionActual(stringFormula);
+        hola.setVisible(true);
+        stringFormula="ANS";
     }//GEN-LAST:event_botonIgualActionPerformed
 
     private void botonSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSumActionPerformed
@@ -1433,6 +1438,7 @@ public class Interfaz extends javax.swing.JFrame {
             if (lastSymbol.equals("num") || lastSymbol.equals("(")) {
                 existePunto = false;
                 lastSymbol = "+";
+                                    stringFormula=stringFormula + "+";
                 if (parentesis == 0) {
                     if (calculadora.op.isEmpty()) {
                         calculadora.operacion(pantalla.getText(), "+");
@@ -1485,7 +1491,7 @@ public class Interfaz extends javax.swing.JFrame {
 
                 }
             } else {
-                FormulaIncoherente hola = new FormulaIncoherente();
+                FormulaIncoherente hola = new FormulaIncoherente("+ no puede aplicarse a esta fórmula");
                 hola.setVisible(true);
             }
         } else {
@@ -1506,6 +1512,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_pantallaActionPerformed
 
     private void jbOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbOnActionPerformed
+        botonOperacion.setVisible(true);
         jbOn.setVisible(false);
         jbOff.setVisible(true);
         pantalla.setVisible(true);
@@ -1559,7 +1566,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonFormula;
+
     private javax.swing.JButton boton0;
     private javax.swing.JButton boton1;
     private javax.swing.JButton boton2;
@@ -1600,5 +1607,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton jbTan;
     private javax.swing.JButton jbi;
     private javax.swing.JTextField pantalla;
+    private javax.swing.JButton botonOperacion;
     // End of variables declaration//GEN-END:variables
 }
