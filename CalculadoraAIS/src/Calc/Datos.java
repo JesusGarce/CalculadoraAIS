@@ -7,10 +7,9 @@ public class Datos {
     String op = "";
     String num1, num2;
     Double sum, multi, div, rest, result;
-    Datos auxCalc, auxCalc2, auxCalc3; //auxCalc * y +, auxCalc2 inmediatos y ^, auxCalc3 parentesis
+    Datos auxCalc, auxCalc2, auxCalc3, parenAnt; //auxCalc * y +, auxCalc2 inmediatos y ^, auxCalc3 y auxCalc4 parentesis
 
     public void asignar(Datos calculadora) {
-
         op = calculadora.op;
         num1 = calculadora.num1;
         num2 = calculadora.num2;
