@@ -2,6 +2,8 @@ package Calc;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -9,6 +11,7 @@ import javax.swing.UIManager;
  */
 public class Interfaz extends javax.swing.JFrame {
 
+    
     private Datos calculadora = new Datos();
     private Boolean existePunto = false;
     private Integer parentesis = 0; //abre parentesis +1 cierra parent -1 si < 0, mal
@@ -18,6 +21,8 @@ public class Interfaz extends javax.swing.JFrame {
         initComponents();
         calculadora.limpiar();
         calculadora.auxCalc3.limpiar();
+        this.setTitle("Calculadora");
+        this.setIconImage(new ImageIcon(getClass().getResource("../51229.png")).getImage());
         this.setVisible(true);
         jbOn.setVisible(true);
         pantalla.setVisible(false);
