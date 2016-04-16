@@ -173,6 +173,7 @@ public class Interfaz extends javax.swing.JFrame {
         calculadora.auxCalc3.limpiar();
         calculadora.auxCalc3.parenAnt = calculadora;
         parentAux = calculadora.auxCalc3;
+        this.setResizable(false);
         this.setTitle("Calculadora");
         this.setIconImage(new ImageIcon(getClass().getResource("../51229.png")).getImage());
         this.setVisible(true);
